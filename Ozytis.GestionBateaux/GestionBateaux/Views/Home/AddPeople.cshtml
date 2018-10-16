@@ -1,0 +1,75 @@
+﻿
+ @{
+    Layout = null;
+} 
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" charset="utf-8" />
+	<link href="../../Content/Index.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-1.6.9/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/Controllers/AddPeopleController.js"></script>
+	<title>AddPeople</title>
+</head>
+<body ng-app="myApp">
+	<div class="menu-selection">
+        @Html.ActionLink("Affichez les Bateaux", "/Index/Acceuil")
+        @Html.ActionLink("Gestion des Bateaux", "/Index/gestionBateaux")
+        @Html.ActionLink("Gestion des Personnes", "/Index/gestionPersonnes", null, new { selected = "selected" })
+	</div>
+	<div class="selection-sous-menu" ng-controller="AddPeople">
+		<div class="list-bateaux">
+			<button selected="selected">Toute les Personnes</button>
+			    	@foreach (var role  in ViewData["Roles"] as List<GestionBateaux.Models.Role>)
+		 	{ 
+		 	<button value="@role.Id">@role.Nom</button>
+		 	         }  
+		</div>
+		<div class="list-personnes">
+			<div identifier="none" class="btnPersonne">
+			 	Nouvelle Personne
+			</div>
+		     	@foreach (var personne  in ViewData["Personnes"] as List<GestionBateaux.Models.Personne>)
+		 { 
+			<div identifier="@personne.Id" class="btnPersonne">
+			 	@personne.Nom
+			 	<br>
+			 	@personne.Prenom
+			 	<br>
+			</div>
+		  }  
+		</div>
+		<div id="panel" class="background-panel" hidden="hidden">
+            <button id="btnClosePanel">X</button>  
+            <form class="panel-select-personne" method="post" action="../../People/hiddenAction/AddOrModify">
+                <div class="list-personne">
+                    
+                    @foreach (var role in ViewData["Roles"] as List<GestionBateaux.Models.Role>)
+                    {
+                        
+                        <div class="personne" id="@role.Id">
+                                Nom: @role.Nom
+                        </div>
+                    }
+                </div>
+                <div class="info-select-personne">
+                    <div id="panelChampsPersonne">
+                        <input type="hidden" name="identifier" value="none"/>
+                        <label>Nom: </label>
+                        <input type="text" id="panelNomPersonne" name="FirstPeople" value="" required>
+                        <br>
+                        <label>Prenom: </label>
+                        <input type="text" id="panelPrenomPersonne" name="LastName" value="" required>
+                    </div>
+                    <div class="div-btn-panel-personne">
+                        <input type="submit" value="Sauvegarder" id="BtnSubmitPanel"/>
+                    </div>
+                </div>
+            </form>
+		</div>
+      </div>
+</body>
+</html>

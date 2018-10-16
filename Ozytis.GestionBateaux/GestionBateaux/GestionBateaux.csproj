@@ -125,14 +125,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AddBoat.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\Controllers\AddBoatController.js" />
+    <Content Include="Scripts\Controllers\AddPeopleController.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\errors.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -144,10 +150,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BoatController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810131003223_InitialCreate.cs" />
+    <Compile Include="Migrations\201810131003223_InitialCreate.Designer.cs">
+      <DependentUpon>201810131003223_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810141005026_InitialCreate1.cs" />
+    <Compile Include="Migrations\201810141005026_InitialCreate1.Designer.cs">
+      <DependentUpon>201810141005026_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bateau.cs" />
     <Compile Include="Models\BddContext.cs" />
     <Compile Include="Models\Dal.cs" />
@@ -170,6 +187,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\AddBoat.cshtml" />
+    <Content Include="Views\Home\AddPeople.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,6 +198,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810131003223_InitialCreate.resx">
+      <DependentUpon>201810131003223_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810141005026_InitialCreate1.resx">
+      <DependentUpon>201810141005026_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

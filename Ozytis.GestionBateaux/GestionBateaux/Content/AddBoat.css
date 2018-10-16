@@ -1,0 +1,74 @@
+﻿body {
+    position: relative;
+    margin: 0;
+}
+
+.clearboth{
+	clear: both;
+}
+
+.menu-selection{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 20vw;
+	background-color: lightgray;
+}
+
+.menu-selection button{
+	width: 100%;
+	border: none;
+	margin-top: 20px;
+	padding: 20px 0;
+	transition: 1s;
+	text-align: left;
+}
+.menu-selection button:hover, .menu-selection button[selected="selected"]{
+	background-color: gray;
+	text-align: center;
+	transition: 1s;
+}
+
+
+.selection-sous-menu{
+	background-color: gray;
+	position: fixed;
+	margin-left: 20vw;
+	width: 80vw;
+	height: 100%;
+}
+
+.list-bateaux{
+	position: fixed;
+	top: 0;
+	left: 20vw;
+	height: 100%;
+	width: 20vw;
+	background-color: white;
+	padding-top: 30px;
+	overflow: scroll;
+}
+
+.list-bateaux button{
+	width: 100%;
+	background-color: lightgray;
+	border: none;
+	margin: 10px 0;
+	padding: 10px 5px 10px;
+	text-align: left;
+	overflow: hidden;
+
+}
+
+.list-bateaux button:hover, .list-bateaux button[selected="selected"]{
+	background-color: gray;
+	text-align: center;
+	transition: 1s;
+}
+
+.list-bateaux button span{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 10px;
+}

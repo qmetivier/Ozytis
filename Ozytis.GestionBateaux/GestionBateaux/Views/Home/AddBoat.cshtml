@@ -1,0 +1,113 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width" charset="utf-8" />
+	<link href="../../Content/Index.css" rel="stylesheet" />
+	<script src="~/Scripts/angular-1.6.9/angular.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/Controllers/AddBoatController.js"></script>
+	<title>AddBoat</title>
+</head>
+<body ng-app="myApp">
+	<div class="menu-selection">
+        @Html.ActionLink("Affichez les Bateaux", "/Index/Acceuil")
+        @Html.ActionLink("Gestion des Bateaux", "/Index/gestionBateaux", null, new { selected = "selected" })
+        @Html.ActionLink("Gestion des Personnes", "/Index/gestionPersonnes")
+	</div>
+	<div class="selection-sous-menu" ng-controller="AddBoat">
+		<div class="list-bateaux">
+			<button identifier="None">
+			 	<span>Nouveau Bateau</span>
+			</button>
+		   	@foreach (var bateau  in ViewData["Bateaux"] as List<GestionBateaux.Models.Bateau>)
+		 {
+			<button identifier="@bateau.Id">
+			 	@bateau.Nom
+			</button>
+		 }
+		</div>
+		<form class="selection-bateau" method="post" action="../../Boat/hiddenAction/AddOrModify">
+			<div class="bateau-detail">
+				<div class="nom-bateau">
+					<label>Nom: </label>
+					<input type="text" name="nom" value="Nom du bateau">
+				</div>
+				<div class="type-bateau">
+					<label>Type:</label>
+					<select name="idType">
+                        <option value="null" selected> </option>
+                        @foreach (var Type in ViewData["Types"] as List<GestionBateaux.Models.Type>)
+                        {
+                            <option value="@Type.Id" infoRole="
+                                        @foreach (var TypeRole in ViewData["TypeRoles"] as List<GestionBateaux.Models.Type_Role>)
+                                        {
+                                            if (TypeRole.TypeId == Type.Id)
+                                            {
+                                                Write(TypeRole.RoleId + "=" + TypeRole.Nb_Role_min + "~" + TypeRole.Nb_Role_max + ";");
+                                            }
+                                        }
+                                        " >@Type.Nom</option>
+                        }
+                    </select>
+				</div>
+				<div class="clearboth"></div>
+			</div>
+				<div class="equipage-detail">
+	        		@foreach (var role  in ViewData["Roles"] as List<GestionBateaux.Models.Role>)
+	        		{
+	        		<div class="div-list-role">
+	        			<label>@role.Nom : </label>
+                        <br />
+	        			<div>
+	        				<div>
+                                <div class="btn-add-personne-bateau" identifier="@role.Id">
+                                    Ajouter une Personne
+                                    <br>
+                                    +
+                                </div>
+		        			</div>
+		        		</div>
+		        	</div>
+		        	}
+		        </div>
+		        <input type="submit" id="BtnSubmit" class="btn-sauvegarder" value="Sauvegarder">
+            <div class="background-panel" id="panel" hidden="hidden">
+                <input id="btnClosePanel" type="button" value="X"> 
+                <div class="panel-select-personne">
+                    <div class="list-personne">
+                        @foreach (var personne in ViewData["Personnes"] as List<GestionBateaux.Models.Personne>)
+                        {
+                            if (personne.Id_Role_Bateau == -1)
+                            {
+                                <div class="personne" id="@personne.Id Personne" role="@foreach (var role in personne.Roles){Write(role.Id + ";");}">
+                                    Nom: @personne.Nom
+                                    <br />
+                                    Prenom: @personne.Prenom
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="info-select-personne">
+                        <div>
+                            <span>Nombre de places Min. restante :</span>
+                            <span id="nb_Min_Place">10</span>
+                            <br />
+                            <span>Nombre de places Max. restante :</span>
+                            <span id="nb_Max_Place">10</span>
+                        </div>
+                        <div class="div-btn-panel-personne">
+                            <input type="button" value="Sauvegarder" id="btnSavRolePanel">
+                        </div>
+                    </div>
+                </div>
+            </div>
+			</form>
+		</div>
+</body>
+</html>

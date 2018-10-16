@@ -1,18 +1,71 @@
 ﻿
-@{
+ @{
     Layout = null;
-}
+}  
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" charset="utf-8" />
-    <link href="~/Content/Index.css" rel="stylesheet" />
-    <title>Index</title>
+	<meta name="viewport" content="width=device-width" charset="utf-8" />
+	<link href="../../Content/Index.css" rel="stylesheet" />
+	<script src="~/Scripts/angular-1.6.9/angular.min.js" type="text/javascript"></script>
+	<title>Index</title>
 </head>
 <body>
-    <div class="menu-selection">
+	<div class="menu-selection">
+       @Html.ActionLink("Affichez les Bateaux", "/Index/Acceuil", null, new { selected = "selected" })
+        @Html.ActionLink("Gestion des Bateaux", "/Index/gestionBateaux")
+        @Html.ActionLink("Gestion des Personnes", "/Index/gestionPersonnes")
+	</div>
+	<div class="selection-sous-menu">
+		<div class="list-bateaux">
+			     	@foreach (var bateau  in ViewData["Bateaux"] as List<GestionBateaux.Models.Bateau>)
+			 {  
+			 <button>
+			 	<span>@bateau.Nom</span>
+			 </button>
+			          }   
+		</div>
+		<div class="selection-bateau">
+			<div class="bateau-detail">
+				<div class="nom-bateau">
+					<label>Nom: </label>
+					<span>bateau.Nom</span>
+				</div>
+				<div class="type-bateau">
+					<label>Type:</label>
+					<span>bateau.Type.Nom</span>
+				</div>
+				<div class="clearboth"></div>
+			</div>
+			<div class="equipage-detail">
+		            	@foreach (var role  in ViewData["Roles"] as List<GestionBateaux.Models.Role>)
+		        {  
+        		<div class="div-list-role">
+        			<label>@role.Nom : </label>
+        			<div>
+	        			<div>
+	        				    	@foreach (var personne  in ViewData["Personnes"] as List<GestionBateaux.Models.Personne>)
+	        				{  
+	        				<div class="detail-personne">
+	        					<div class="nom-personne">
+	        						<label>Nom: </label>
+	        						<span>@personne.Nom</span>
+	        					</div>
+	        					<div class="prenom-personne">
+	        						<label>Prenom:</label>
+	        						<span>@personne.Prenom</span>
+	        					</div>
+	        				</div>
+	        				   }   
+	        			</div>
+        			</div>
+        		</div>
+        		   }   
+        	</div>
+        </div>
     </div>
 </body>
+
 </html>
